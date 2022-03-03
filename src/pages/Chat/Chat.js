@@ -71,7 +71,6 @@ export default function Chat({ socket }) {
     if (!loading)
       socket.on("receiveMessage", async (data) => {
         if (mounted) {
-          console.log(data);
           try {
             const config = {
               headers: { Authorization: `Bearer ${token}` },

@@ -65,7 +65,6 @@ export default function SendForm({
             let arr = [...chat];
             arr.push(res.data);
             setChat(arr);
-            console.log(res.data);
             socket.emit("sendMessage", res.data, token);
             setMessageText("");
           } else {

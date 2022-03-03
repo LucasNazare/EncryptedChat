@@ -209,7 +209,7 @@ export default function ChatDetails({
                   <Typography variant="h1" style={labelStyle}>
                     Participantes
                   </Typography>
-                  {canEdit && (
+                  {chatData === null && (
                     <Button
                       color="primary"
                       variant="outlined"

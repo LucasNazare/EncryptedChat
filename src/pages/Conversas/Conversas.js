@@ -77,7 +77,6 @@ export default function Conversas({ forceReMount, socket }) {
     if (!loading) {
       socket.on("receiveMessage", (data) => {
         if (mounted) {
-          console.log("Aqui estou");
           setChats(data.chats);
         }
       });

@@ -73,7 +73,7 @@ export default function SendFiles({
       console.log(e.response?.data);
     }
   };
-  if (cameraOn) return <CameraFeed setCameraOn={setCameraOn} />;
+  //if (cameraOn) return <CameraFeed setCameraOn={setCameraOn} />;
   return (
     <Zoom
       in={open}
@@ -113,7 +113,7 @@ export default function SendFiles({
             <ImageIcon style={{ fontSize: "1.7rem", padding: "3px" }} />
           </IconButton>
         </label>
-        <IconButton
+        {/* <IconButton
           variant="outlined"
           style={{
             zIndex: 1000,
@@ -124,7 +124,7 @@ export default function SendFiles({
           onClick={() => setCameraOn(true)}
         >
           <CameraAltIcon style={{ fontSize: "1.7rem", padding: "3px" }} />
-        </IconButton>
+        </IconButton> */}
       </div>
     </Zoom>
   );
