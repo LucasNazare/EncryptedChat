@@ -36,11 +36,11 @@ export default function Conversas({ forceReMount, socket }) {
     };
     try {
       let gkRes = await axios.post(
-        "http://localhost/api/chats/set-gk",
+        "http://18.230.11.27/api/chats/set-gk",
         { k, iv: IV },
         config
       );
-      let res = await axios.get("http://localhost/api/chats/", config);
+      let res = await axios.get("http://18.230.11.27/api/chats/", config);
       let kArr = [];
       if (res.data) {
         let arr = [];

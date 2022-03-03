@@ -44,11 +44,11 @@ export default function Chat({ socket }) {
     };
     try {
       let chatRes = await axios.get(
-        "http://localhost/api/chats/" + params.id,
+        "http://18.230.11.27/api/chats/" + params.id,
         config
       );
       let messagesRes = await axios.get(
-        "http://localhost/api/messages/by_id/" + params.id,
+        "http://18.230.11.27/api/messages/by_id/" + params.id,
         config
       );
       if (chatRes.data && messagesRes.data) {

@@ -23,7 +23,7 @@ export default function ChangePassword() {
         };
         try {
           let res = await axios.post(
-            "http://localhost/api/accounts/change-password",
+            "http://18.230.11.27/api/accounts/change-password",
             {
               password,
             },

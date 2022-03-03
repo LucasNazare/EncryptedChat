@@ -55,7 +55,10 @@ export default function ChatDetails({
       headers: { Authorization: `Bearer ${token}` },
     };
     try {
-      let res = await axios.get("http://localhost/api/accounts/" + id, config);
+      let res = await axios.get(
+        "http://18.230.11.27/api/accounts/" + id,
+        config
+      );
       if (res.data) {
         let arr = [...participants];
         let newItem = { id: res.data._id, username: res.data.username };
@@ -82,7 +85,7 @@ export default function ChatDetails({
       };
       try {
         let res = await axios.post(
-          "http://localhost/api/chats/edit",
+          "http://18.230.11.27/api/chats/edit",
           {
             chatId: chatData._id,
             name: nomeGrupo,

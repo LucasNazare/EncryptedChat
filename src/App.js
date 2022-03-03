@@ -49,7 +49,7 @@ const theme = createTheme({
   },
 });
 
-const socket = io("ws://localhost:3900");
+const socket = io("ws://18.230.11.27:3900");
 function App() {
   const { user, token } = useContext(AuthContext);
   const [reMount, setReMount] = useState(0);

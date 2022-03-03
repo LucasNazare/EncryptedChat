@@ -50,7 +50,10 @@ export default function NewChat({ socket }) {
       headers: { Authorization: `Bearer ${token}` },
     };
     try {
-      let res = await axios.get("http://localhost/api/accounts/" + id, config);
+      let res = await axios.get(
+        "http://18.230.11.27/api/accounts/" + id,
+        config
+      );
       if (res.data) {
         let arr = [...participants];
         let newItem = { id: res.data._id, username: res.data.username };
@@ -80,7 +83,7 @@ export default function NewChat({ socket }) {
         let groupK = nomeGrupo + String(Date.now()) + k + K_SECRET;
         //let encK = CryptoJS.AES.encrypt(groupK, k).toString();
         let res = await axios.post(
-          "http://localhost/api/chats/create",
+          "http://18.230.11.27/api/chats/create",
           {
             name: nomeGrupo,
             participants: participants,

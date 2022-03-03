@@ -44,13 +44,13 @@ export default function SendFiles({
       formData.append("k", k);
       formData.append("image", file);
       let res = await axios.post(
-        "http://localhost/api/messages/send-image",
+        "http://18.230.11.27/api/messages/send-image",
         formData,
         config
       );
       if (res.data) {
         let msgRes = await axios.post(
-          "http://localhost/api/messages/send",
+          "http://18.230.11.27/api/messages/send",
           {
             type: "IMAGE",
             chatId: chatData._id,

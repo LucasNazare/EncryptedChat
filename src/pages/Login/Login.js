@@ -19,7 +19,7 @@ export default function Login() {
     e.preventDefault();
     if ((username != "", password != "")) {
       try {
-        let res = await axios.post("http://localhost/api/accounts/login", {
+        let res = await axios.post("http://18.230.11.27/api/accounts/login", {
           username,
           password,
         });

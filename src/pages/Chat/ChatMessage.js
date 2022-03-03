@@ -68,7 +68,7 @@ export default function ChatMessage({
               src={
                 String(msg).substring(0, 4) === "blob"
                   ? msg
-                  : "http://localhost/api/messages/stream-audio/" +
+                  : "http://18.230.11.27/api/messages/stream-audio/" +
                     msg +
                     "/" +
                     k
@@ -85,7 +85,7 @@ export default function ChatMessage({
               src={
                 String(msg).substring(0, 4) === "blob"
                   ? msg
-                  : "http://localhost/api/messages/stream-image/" +
+                  : "http://18.230.11.27/api/messages/stream-image/" +
                     msg +
                     "/" +
                     k
