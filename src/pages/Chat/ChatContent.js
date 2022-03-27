@@ -6,7 +6,14 @@ import { AuthContext } from "../../contexts/AuthContext";
 import ChatMessage from "./ChatMessage";
 const CryptoJS = require("crypto-js");
 
-export default function ChatContent({ token, chat, chatData, scrollRef }) {
+export default function ChatContent({
+  token,
+  chat,
+  chatData,
+  scrollRef,
+  socket,
+  setChat,
+}) {
   const navigate = useNavigate();
   const { user, IV, kMap } = useContext(AuthContext);
   const [audios, setAudios] = useState([]);
@@ -57,9 +64,13 @@ export default function ChatContent({ token, chat, chatData, scrollRef }) {
         {chat?.map((message, i) => {
           return (
             <Grid item xs={12} key={message._id}>
-              <div ref={scrollRef}>
+              <div>
                 <ChatMessage
+                  msgObj={message}
                   k={kMap.find((m) => m.id === chatData._id)?.k}
+                  socket={socket}
+                  chat={chat}
+                  setChat={setChat}
                   msg={decrypt(message)}
                   type={message.type}
                   sent={message.senderId === user._id}
@@ -83,6 +94,7 @@ export default function ChatContent({ token, chat, chatData, scrollRef }) {
                   }
                 />
               </div>
+              <div ref={scrollRef}></div>
             </Grid>
           );
         })}

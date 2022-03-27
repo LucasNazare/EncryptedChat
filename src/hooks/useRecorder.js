@@ -5,18 +5,23 @@ const useRecorder = () => {
   const [audioBlob, setAudioBlob] = useState(null);
   const [isRecording, setIsRecording] = useState(false);
   const [recorder, setRecorder] = useState(null);
+  const [stream, setStream] = useState(null);
 
   useEffect(() => {
     // Lazily obtain recorder first time we're recording.
     if (recorder === null) {
       if (isRecording) {
-        requestRecorder().then(setRecorder, console.error);
+        requestRecorder(setStream).then(setRecorder, console.error);
       }
       return;
     }
     // Manage recorder state.
     if (isRecording) {
-      recorder.start();
+      try {
+        recorder.start();
+      } catch (e) {
+        requestRecorder(setStream).then(setRecorder, console.error);
+      }
     } else {
       recorder.stop();
     }
@@ -38,6 +43,9 @@ const useRecorder = () => {
 
   const stopRecording = () => {
     setIsRecording(false);
+    stream
+      .getTracks() // get all tracks from the MediaStream
+      .forEach((track) => track.stop());
   };
 
   return [
@@ -51,8 +59,9 @@ const useRecorder = () => {
   ];
 };
 
-async function requestRecorder() {
+async function requestRecorder(setStream) {
   const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+  setStream(stream);
   return new MediaRecorder(stream);
 }
 export default useRecorder;

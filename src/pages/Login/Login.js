@@ -19,10 +19,13 @@ export default function Login() {
     e.preventDefault();
     if ((username != "", password != "")) {
       try {
-        let res = await axios.post("http://18.230.11.27/api/accounts/login", {
-          username,
-          password,
-        });
+        let res = await axios.post(
+          "http://saferabbit.tk:3000/api/accounts/login",
+          {
+            username,
+            password,
+          }
+        );
         if (res.data.ok) {
           const k = CryptoJS.SHA256(
             username +
@@ -41,6 +44,7 @@ export default function Login() {
           alert(res.data.msg);
         }
       } catch (e) {
+        console.log(e);
         console.log(e.response?.data);
         alert(e.response?.data);
       }
@@ -85,7 +89,7 @@ export default function Login() {
             >
               <Grid item xs={10} style={{ paddingTop: "20px" }}>
                 <Typography variant="h1" style={labelStyle}>
-                  Usuario
+                  Usuário
                 </Typography>
                 <TextField
                   color="primary"
@@ -113,6 +117,11 @@ export default function Login() {
                 <Typography variant="h1" style={labelStyle}>
                   Senha
                 </Typography>
+                <input
+                  type="password"
+                  tabindex="-1"
+                  style={{ position: "absolute", top: -1000000 }}
+                />
                 <TextField
                   color="primary"
                   variant="outlined"

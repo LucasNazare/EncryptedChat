@@ -23,7 +23,7 @@ export default function FirstLogin() {
         };
         try {
           let res = await axios.post(
-            "http://18.230.11.27/api/accounts/change-sos-password",
+            "https://saferabbit.tk/api/accounts/change-sos-password",
             {
               sosPassword: password,
             },

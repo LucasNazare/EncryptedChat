@@ -44,11 +44,11 @@ export default function Chat({ socket }) {
     };
     try {
       let chatRes = await axios.get(
-        "http://18.230.11.27/api/chats/" + params.id,
+        "https://saferabbit.tk/api/chats/" + params.id,
         config
       );
       let messagesRes = await axios.get(
-        "http://18.230.11.27/api/messages/by_id/" + params.id,
+        "https://saferabbit.tk/api/messages/by_id/" + params.id,
         config
       );
       if (chatRes.data && messagesRes.data) {
@@ -97,7 +97,9 @@ export default function Chat({ socket }) {
   }, []);
 
   useEffect(() => {
-    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+    scrollRef.current?.scrollIntoView(
+      chat[chat.length - 1]?.type === "AUDIO" ? {} : { behavior: "smooth" }
+    );
   }, [chat]);
   useEffect(() => {
     if (recordingTime > -1)
@@ -136,9 +138,11 @@ export default function Chat({ socket }) {
             <ChatContent
               token={token}
               chat={chat}
+              setChat={setChat}
               style={{ height: "100%" }}
               chatData={chatData}
               scrollRef={scrollRef}
+              socket={socket}
             />
             <SendFiles
               chat={chat}
@@ -148,13 +152,6 @@ export default function Chat({ socket }) {
               socket={socket}
               selectedImage={selectedImage}
               setSelectedImage={setSelectedImage}
-              audioURL={audioURL}
-              setAudioURL={setAudioURL}
-              isRecording={isRecording}
-              startRecording={startRecording}
-              stopRecording={stopRecording}
-              audioBlob={audioBlob}
-              setAudioBlob={setAudioBlob}
             />
             {isRecording && (
               <Fab

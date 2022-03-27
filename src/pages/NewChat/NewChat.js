@@ -51,7 +51,7 @@ export default function NewChat({ socket }) {
     };
     try {
       let res = await axios.get(
-        "http://18.230.11.27/api/accounts/" + id,
+        "https://saferabbit.tk/api/accounts/" + id,
         config
       );
       if (res.data) {
@@ -83,7 +83,7 @@ export default function NewChat({ socket }) {
         let groupK = nomeGrupo + String(Date.now()) + k + K_SECRET;
         //let encK = CryptoJS.AES.encrypt(groupK, k).toString();
         let res = await axios.post(
-          "http://18.230.11.27/api/chats/create",
+          "https://saferabbit.tk/api/chats/create",
           {
             name: nomeGrupo,
             participants: participants,

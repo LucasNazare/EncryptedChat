@@ -56,7 +56,7 @@ export default function ChatDetails({
     };
     try {
       let res = await axios.get(
-        "http://18.230.11.27/api/accounts/" + id,
+        "https://saferabbit.tk/api/accounts/" + id,
         config
       );
       if (res.data) {
@@ -85,7 +85,7 @@ export default function ChatDetails({
       };
       try {
         let res = await axios.post(
-          "http://18.230.11.27/api/chats/edit",
+          "https://saferabbit.tk/api/chats/edit",
           {
             chatId: chatData._id,
             name: nomeGrupo,

@@ -53,7 +53,7 @@ export default function SendForm({
             }
           ).toString();
           let res = await axios.post(
-            "http://18.230.11.27/api/messages/send",
+            "https://saferabbit.tk/api/messages/send",
             {
               type: "TEXT",
               chatId: chatData._id,
@@ -91,13 +91,13 @@ export default function SendForm({
       formData.append("iv", chatData._id + IV);
       formData.append("audio", file);
       let res = await axios.post(
-        "http://18.230.11.27/api/messages/send-audio",
+        "https://saferabbit.tk/api/messages/send-audio",
         formData,
         config
       );
       if (res.data) {
         let msgRes = await axios.post(
-          "http://18.230.11.27/api/messages/send",
+          "https://saferabbit.tk/api/messages/send",
           {
             type: "AUDIO",
             chatId: chatData._id,

@@ -21,11 +21,6 @@ export default function SendFiles({
   socket,
   selectedImage,
   setSelectedImage,
-  audioURL,
-  setAudioURL,
-  isRecording,
-  startRecording,
-  stopRecording,
 }) {
   const { token, kMap, IV } = useContext(AuthContext);
   const [cameraImage, setCameraImage] = useState(null);
@@ -44,13 +39,13 @@ export default function SendFiles({
       formData.append("k", k);
       formData.append("image", file);
       let res = await axios.post(
-        "http://18.230.11.27/api/messages/send-image",
+        "https://saferabbit.tk/api/messages/send-image",
         formData,
         config
       );
       if (res.data) {
         let msgRes = await axios.post(
-          "http://18.230.11.27/api/messages/send",
+          "https://saferabbit.tk/api/messages/send",
           {
             type: "IMAGE",
             chatId: chatData._id,

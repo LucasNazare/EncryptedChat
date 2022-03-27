@@ -1,8 +1,10 @@
 import { Typography } from "@mui/material";
 import React, { useState } from "react";
 import Profile from "../Conversas/Profile";
+import MessageDetails from "./MessageDetails";
 
 export default function ChatMessage({
+  msgObj,
   msg,
   time,
   senderName,
@@ -11,8 +13,12 @@ export default function ChatMessage({
   last,
   type,
   k,
+  socket,
+  chat,
+  setChat,
 }) {
   const [profileOpen, setProfileOpen] = useState(false);
+  const [selectedMsg, setSelectedMsg] = useState(null);
   const messageBoxStyle = {
     background: sent ? "#490073" : "#fd6000",
     maxWidth: "80vw",
@@ -42,7 +48,7 @@ export default function ChatMessage({
         >
           <Typography
             variant="caption"
-            style={{ fontWeight: "800" }}
+            style={{ fontWeight: "800", cursor: "pointer" }}
             onClick={() => setProfileOpen(true)}
           >
             {senderName}
@@ -58,7 +64,9 @@ export default function ChatMessage({
               style={{
                 overflow: "hidden",
                 wordWrap: "break-word",
+                cursor: "pointer",
               }}
+              onClick={() => setSelectedMsg(msgObj)}
             >
               {msg}
             </Typography>
@@ -68,7 +76,7 @@ export default function ChatMessage({
               src={
                 String(msg).substring(0, 4) === "blob"
                   ? msg
-                  : "http://18.230.11.27/api/messages/stream-audio/" +
+                  : "https://saferabbit.tk/api/messages/stream-audio/" +
                     msg +
                     "/" +
                     k
@@ -85,7 +93,7 @@ export default function ChatMessage({
               src={
                 String(msg).substring(0, 4) === "blob"
                   ? msg
-                  : "http://18.230.11.27/api/messages/stream-image/" +
+                  : "https://saferabbit.tk/api/messages/stream-image/" +
                     msg +
                     "/" +
                     k
@@ -102,6 +110,14 @@ export default function ChatMessage({
           open={profileOpen}
           close={() => setProfileOpen(false)}
           user={{ _id: senderId, username: senderName }}
+        />
+        <MessageDetails
+          selectedMsg={selectedMsg}
+          msg={msg}
+          close={() => setSelectedMsg(null)}
+          socket={socket}
+          chat={chat}
+          setChat={setChat}
         />
       </div>
     );

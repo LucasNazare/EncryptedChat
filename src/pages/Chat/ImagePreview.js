@@ -1,10 +1,13 @@
 import { Button, Dialog, DialogActions } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 
 export default function ImagePreview({ image, setImage, send }) {
+  const [loading, setLoading] = useState(false);
   const close = () => setImage(null);
   const sendAndClose = async () => {
+    setLoading(true);
     await send();
+    setLoading(false);
     close();
   };
   return (
@@ -24,6 +27,7 @@ export default function ImagePreview({ image, setImage, send }) {
           color="secondary"
           variant="contained"
           fullWidth
+          disabled={loading}
           style={{ fontFamily: "'VT323'", fontSize: "1rem" }}
           onClick={sendAndClose}
         >
