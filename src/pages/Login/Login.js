@@ -19,13 +19,10 @@ export default function Login() {
     e.preventDefault();
     if ((username != "", password != "")) {
       try {
-        let res = await axios.post(
-          "http://saferabbit.tk:3000/api/accounts/login",
-          {
-            username,
-            password,
-          }
-        );
+        let res = await axios.post("https://saferabbit.tk/api/accounts/login", {
+          username,
+          password,
+        });
         if (res.data.ok) {
           const k = CryptoJS.SHA256(
             username +
@@ -119,7 +116,7 @@ export default function Login() {
                 </Typography>
                 <input
                   type="password"
-                  tabindex="-1"
+                  tabIndex="-1"
                   style={{ position: "absolute", top: -1000000 }}
                 />
                 <TextField

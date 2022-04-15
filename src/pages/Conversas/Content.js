@@ -8,11 +8,15 @@ const CryptoJS = require("crypto-js");
 
 function ConversaItem(item, key, navigate, userId, k, IV) {
   const decrypt = (msg) => {
-    let decrypted = CryptoJS.AES.decrypt(msg, CryptoJS.enc.Hex.parse(k), {
-      iv: CryptoJS.enc.Hex.parse(item._id + IV),
-    });
-    decrypted = decrypted.toString(CryptoJS.enc.Utf8);
-    return decrypted;
+    try {
+      let decrypted = CryptoJS.AES.decrypt(msg, CryptoJS.enc.Hex.parse(k), {
+        iv: CryptoJS.enc.Hex.parse(item._id + IV),
+      });
+      decrypted = decrypted.toString(CryptoJS.enc.Utf8);
+      return decrypted;
+    } catch (e) {
+      return;
+    }
   };
   return (
     <Grid
@@ -56,8 +60,10 @@ function ConversaItem(item, key, navigate, userId, k, IV) {
           <Typography variant="h2">{item.name}</Typography>
           <Typography variant="body2">
             {item?.lastMsg?.type === "TEXT"
-              ? String(decrypt(item.lastMsg.content)).substring(0, 30) +
-                (item.lastMsg.content.length > 30 ? "..." : "")
+              ? String(decrypt(item?.lastMsg?.content)).length > 30
+                ? String(decrypt(item?.lastMsg?.content)).substring(0, 30) +
+                  "..."
+                : String(decrypt(item?.lastMsg?.content)).substring(0, 30) + ""
               : item?.lastMsg?.type === "AUDIO"
               ? "Arquivo de Áudio"
               : item?.lastMsg?.type === "IMAGE"
@@ -69,7 +75,7 @@ function ConversaItem(item, key, navigate, userId, k, IV) {
         <Grid item xs={2} style={{ height: "100%", textAlign: "right" }}>
           <Typography variant="caption">
             {item.lastMsg
-              ? new Date(item.lastMsg.createdAt)
+              ? new Date(item.lastMsg?.createdAt)
                   .toTimeString()
                   .split(" ")[0]
                   .split(":")[0] +

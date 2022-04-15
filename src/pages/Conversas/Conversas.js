@@ -77,7 +77,11 @@ export default function Conversas({ forceReMount, socket }) {
     if (!loading) {
       socket.on("receiveMessage", (data) => {
         if (mounted) {
-          setChats(data.chats);
+          try {
+            setChats(data.chats);
+          } catch (e) {
+            console.log(e);
+          }
         }
       });
       socket.on("chatCreated", async (message) => {

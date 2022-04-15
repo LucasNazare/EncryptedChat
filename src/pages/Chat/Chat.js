@@ -98,7 +98,7 @@ export default function Chat({ socket }) {
 
   useEffect(() => {
     scrollRef.current?.scrollIntoView(
-      chat[chat.length - 1]?.type === "AUDIO" ? {} : { behavior: "smooth" }
+      chat[chat.length - 1]?.type === "TEXT" ? { behavior: "smooth" } : {}
     );
   }, [chat]);
   useEffect(() => {
